@@ -1,8 +1,14 @@
-start-venv:
-	python -m venv .venv
-
-activate-venv:
-	source env/bin/activate
+create-venv:
+	@echo "Creating virtual environment"
+	python3 -m venv .venv
 
 install:
-	pip install -r requirements.txt
+	@echo "Installing dependencies from the requirements.txt"
+	.venv/bin/pip3 install -r requirements.txt
+
+run: create-venv activate-venv install
+	@echo "Starting the script"
+	.venv/bin/python3 src/main.py
+
+clean-venv:
+	rm -rf .venv
