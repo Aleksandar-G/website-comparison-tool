@@ -16,9 +16,11 @@ def take_screenshot(
         page.goto(website_url)
 
         # Take a screenshot
-        page.screenshot(path=screenshot_full_file_path)
+        screenshot = page.screenshot(path=screenshot_full_file_path)
 
-        print(f"Screenshot saved to {screenshot_full_file_path}")
+        print(f"Screenshot taken")
 
         # Clean up
         browser.close()
+
+        return screenshot
