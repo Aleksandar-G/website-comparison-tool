@@ -5,6 +5,7 @@ import helper_funcs
 from screenshot_taker import take_screenshot
 from postprocess_image import convert_screenshot_to_black_white
 from compare_screenshots import compare_screenshots
+from send_telegram_notification import send_telegram_message
 
 SCREENSHOT_FOLDER = "./screenshots/"
 SCREENSHOT_FILE_EXTENSION = "png"
@@ -69,7 +70,7 @@ def watchdog(website: helper_funcs.Website):
         print(f"{website.name} no updates")
     else:
         print(f"{website.name} has new listings")
-
+        send_telegram_message(website)
     # send a notification on whatsapp or telegram
 
 
