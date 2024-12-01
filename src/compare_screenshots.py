@@ -17,8 +17,6 @@ def compare_screenshots(screenshot_path1: str, screenshot_path2: str) -> bool:
     # Threshold for significant differences
     diff = diff.point(lambda p: p > DIFFERENCE_THRESHOLD and 255)
 
-    diff.show()
-
     # Check if screenshots are identical
     if diff.getbbox() is None:
         return True
