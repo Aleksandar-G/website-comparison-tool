@@ -1,4 +1,4 @@
-create-venv:
+create-venv: clean-venv
 	@echo "Creating virtual environment"
 	@python3 -m venv .venv
 
