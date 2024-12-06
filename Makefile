@@ -5,6 +5,7 @@ create-venv: clean-venv
 install:
 	@echo "Installing dependencies from the requirements.txt"
 	@.venv/bin/pip3 install -r requirements.txt
+	@.venv/bin/playwright install
 
 run: create-venv install
 	@echo "Starting the script"
