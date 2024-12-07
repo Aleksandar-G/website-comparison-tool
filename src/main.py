@@ -74,7 +74,10 @@ def watchdog(website: helper_funcs.Website):
         print(f"{website.name} no updates")
     else:
         print(f"{website.name} has new listings")
-        send_telegram_message(website)
+
+        # Message to send
+        message = f"{website.name} has new listings URL:{website.url}"
+        send_telegram_message(message)
     # send a notification on whatsapp or telegram
 
 
