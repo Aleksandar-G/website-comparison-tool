@@ -1,6 +1,6 @@
 from PIL import Image, ImageChops, ImageFilter
 
-DIFFERENCE_THRESHOLD = 50
+DIFFERENCE_THRESHOLD = 60
 
 
 def compare_screenshots(screenshot_path1: str, screenshot_path2: str) -> bool:
