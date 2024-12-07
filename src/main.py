@@ -78,7 +78,6 @@ def watchdog(website: helper_funcs.Website):
         # Message to send
         message = f"{website.name} has new listings URL:{website.url}"
         send_telegram_message(message)
-    # send a notification on whatsapp or telegram
 
 
 def loop():
