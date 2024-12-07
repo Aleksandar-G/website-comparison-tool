@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageFilter
 from io import BytesIO
 
 
@@ -11,3 +11,8 @@ def convert_screenshot_to_black_white(screenshot, screenshot_full_path):
 
     # Save the new grayscaled screenshot
     bw_img.save(screenshot_full_path)
+
+
+def apply_blur(image: Image) -> Image:
+    # Apply a blur to reduce noise
+    return image.filter(ImageFilter.GaussianBlur(radius=1))

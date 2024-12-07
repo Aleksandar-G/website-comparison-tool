@@ -1,4 +1,5 @@
-from PIL import Image, ImageChops, ImageFilter
+from PIL import Image, ImageChops
+from postprocess_image import apply_blur
 
 DIFFERENCE_THRESHOLD = 60
 
@@ -11,11 +12,10 @@ def compare_screenshots(screenshot_path1: str, screenshot_path2: str) -> bool:
     # Compare screenshots
     diff = ImageChops.difference(screenshot1, screenshot2)
 
-    # Apply a blur to reduce noise
-    diff = diff.filter(ImageFilter.GaussianBlur(radius=1))
+    blur_image = apply_blur(diff)
 
     # Threshold for significant differences
-    diff = diff.point(lambda p: p > DIFFERENCE_THRESHOLD and 255)
+    diff = blur_image.point(lambda p: p > DIFFERENCE_THRESHOLD and 255)
 
     # Check if screenshots are identical
     if diff.getbbox() is None:
