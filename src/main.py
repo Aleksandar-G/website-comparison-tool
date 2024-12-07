@@ -9,7 +9,7 @@ from send_telegram_notification import send_telegram_message
 
 SCREENSHOT_FOLDER = "./screenshots/"
 SCREENSHOT_FILE_EXTENSION = "png"
-WAIT_PERIOD_SECONDS = 60
+WAIT_PERIOD_SECONDS = 1800  # 30 minutes
 
 websites = [
     helper_funcs.Website(
