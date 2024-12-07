@@ -82,9 +82,12 @@ def watchdog(website: helper_funcs.Website):
 
 def loop():
     while True:
-        main()
-        print(f"Waiting now for {WAIT_PERIOD_SECONDS} seconds...")
-        sleep(WAIT_PERIOD_SECONDS)
+        try:
+            main()
+            print(f"Waiting now for {WAIT_PERIOD_SECONDS} seconds...")
+            sleep(WAIT_PERIOD_SECONDS)
+        except Exception as error:
+            send_telegram_message(f"Error has occured: {error}")
 
 
 loop()
