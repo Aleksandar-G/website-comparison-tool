@@ -20,14 +20,6 @@ websites = [
         name="funda",
         url="https://www.funda.nl/zoeken/huur?selected_area=%5B%22eindhoven%22%5D&rooms=%221-%22&price=%22-1250%22&sort=%22date_down%22",
     ),
-    helper_funcs.Website(
-        name="holland2stayLoterry",
-        url="https://holland2stay.com/residences?page=1&available_to_book%5Bfilter%5D=Available+in+lottery%2C336&city%5Bfilter%5D=Eindhoven%2C29",
-    ),
-    helper_funcs.Website(
-        name="holland2stayBookingDirectly",
-        url="https://holland2stay.com/residences?page=1&available_to_book%5Bfilter%5D=Available+to+book%2C179&city%5Bfilter%5D=Eindhoven%2C29",
-    ),
 ]
 
 
