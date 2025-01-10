@@ -6,6 +6,10 @@ create-folder-screenshots:
 	@echo "Creating folder screenshots"
 	@mkdir -p screenshots
 
+clean-folder-screenshots:
+	@echo "Removing folder screenshots"
+	@rm -rf ./screenshots
+
 install:
 	@echo "Installing dependencies from the requirements.txt"
 	@.venv/bin/pip3 install -r requirements.txt
