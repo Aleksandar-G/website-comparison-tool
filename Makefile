@@ -15,7 +15,7 @@ install:
 	@.venv/bin/pip3 install -r requirements.txt
 	@.venv/bin/playwright install
 
-run: create-venv create-folder-screenshots install
+run: create-venv clean-folder-screenshots create-folder-screenshots install
 	@echo "Starting the script"
 	@.venv/bin/python3 src/main.py
 
