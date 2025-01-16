@@ -1,7 +1,5 @@
 from PIL import Image, ImageChops
-from postprocess_image import apply_blur
-
-DIFFERENCE_THRESHOLD = 60
+from significant_difference_threshold import significant_difference_threshold
 
 
 def compare_screenshots(screenshot_path1: str, screenshot_path2: str) -> bool:
@@ -12,13 +10,5 @@ def compare_screenshots(screenshot_path1: str, screenshot_path2: str) -> bool:
     # Compare screenshots
     diff = ImageChops.difference(screenshot1, screenshot2)
 
-    blur_image = apply_blur(diff)
-
-    # Threshold for significant differences
-    diff = blur_image.point(lambda p: p > DIFFERENCE_THRESHOLD and 255)
-
-    # Check if screenshots are identical
-    if diff.getbbox() is None:
-        return True
-    else:
-        return False
+    # Check if the difference is significant
+    return significant_difference_threshold(diff)
