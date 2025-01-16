@@ -33,19 +33,21 @@ websites = [
 
 
 def initialize():
+    error_count = 0
     try:
         if not helper_funcs.is_folder_full(SCREENSHOT_FOLDER, websites):
             for website in websites:
                 startup(website)
         cycle()
 
-    except exceptions.ConnectionError:
-        print("Connection error occurred and the script is rerunning")
-        cycle()
     except Exception as error:
         print(f"Error has occurred: {error}")
         send_telegram_message(f"Error has occurred: {error}")
-        return error
+        error_count += 1
+
+        if error_count >= 10:
+            send_telegram_message("ERROR THE SCRIPT HAS STOPPED")
+            return error
 
 
 def startup(website):
