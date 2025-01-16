@@ -1,5 +1,6 @@
 from time import sleep
 from os import rename
+from requests import exceptions
 
 import helper_funcs
 from screenshot_taker import take_screenshot
@@ -9,27 +10,38 @@ from send_telegram_notification import send_telegram_message
 
 SCREENSHOT_FOLDER = "./screenshots/"
 SCREENSHOT_FILE_EXTENSION = "png"
-WAIT_PERIOD_SECONDS = 1800  # 30 minutes
+WAIT_PERIOD_SECONDS = 5  # 30 minutes
 
 websites = [
     helper_funcs.Website(
         name="pararius",
-        url="https://www.pararius.com/apartments/eindhoven/0-1200/1-bedrooms",
+        url="https://www.pararius.com/apartments/eindhoven/0-1000/1-bedrooms",
     ),
     helper_funcs.Website(
         name="funda",
-        url="https://www.funda.nl/zoeken/huur?selected_area=%5B%22eindhoven%22%5D&rooms=%221-%22&price=%22-1250%22&sort=%22date_down%22",
+        url="https://www.funda.nl/zoeken/huur?selected_area=%5B%22eindhoven%22%5D&rooms=%221-%22&price=%22-1000%22&sort=%22date_down%22",
+    ),
+    helper_funcs.Website(
+        name="Friendly Housing",
+        url="https://friendlyhousing.nl/en/house-listings/?property-type=appartement&min-price=750&max-price=1500&available-from=&type=&sort=",
     ),
 ]
 
 
-def main():
-    if helper_funcs.is_folder_empty(SCREENSHOT_FOLDER):
-        for website in websites:
-            startup(website)
-    else:
-        for website in websites:
-            watchdog(website)
+def initialize():
+    try:
+        if not helper_funcs.is_folder_full(SCREENSHOT_FOLDER, websites):
+            for website in websites:
+                startup(website)
+        cycle()
+
+    except exceptions.ConnectionError:
+        print("Connection error occurred and the script is rerunning")
+        cycle()
+    except Exception as error:
+        print(f"Error has occurred: {error}")
+        send_telegram_message(f"Error has occurred: {error}")
+        return error
 
 
 def startup(website):
@@ -72,16 +84,13 @@ def watchdog(website: helper_funcs.Website):
         send_telegram_message(message)
 
 
-def loop():
+def cycle():
     while True:
-        try:
-            main()
-            print(f"Waiting now for {WAIT_PERIOD_SECONDS} seconds...")
-            sleep(WAIT_PERIOD_SECONDS)
-        except Exception as error:
-            print(f"Error has occurred: {error}")
-            send_telegram_message(f"Error has occurred: {error}")
-            return error
+        for website in websites:
+            watchdog(website)
+
+        print(f"Waiting now for {WAIT_PERIOD_SECONDS} seconds...")
+        sleep(WAIT_PERIOD_SECONDS)
 
 
-loop()
+initialize()
