@@ -14,16 +14,20 @@ WAIT_PERIOD_SECONDS = 3600  # 60 minutes
 
 websites = [
     helper_funcs.Website(
-        name="pararius",
+        name="Pararius",
         url="https://www.pararius.com/apartments/eindhoven/0-1000/1-bedrooms",
     ),
     helper_funcs.Website(
-        name="funda",
+        name="Funda",
         url="https://www.funda.nl/zoeken/huur?selected_area=%5B%22eindhoven%22%5D&rooms=%221-%22&price=%22-1000%22&sort=%22date_down%22",
     ),
     helper_funcs.Website(
         name="Friendly Housing",
         url="https://friendlyhousing.nl/en/house-listings/?property-type=appartement&min-price=750&max-price=1500&available-from=&type=&sort=",
+    ),
+    helper_funcs.Website(
+        name="Huurwoningen",
+        url="https://www.huurwoningen.nl/in/eindhoven/?price=600-1000",
     ),
 ]
 
