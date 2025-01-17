@@ -33,7 +33,7 @@ websites = [
 
 
 def initialize():
-    error_count = 0
+
     try:
         if not helper_funcs.is_folder_full(SCREENSHOT_FOLDER, websites):
             for website in websites:
@@ -41,13 +41,14 @@ def initialize():
         cycle()
 
     except Exception as error:
-        print(f"Error has occurred: {error}")
-        send_telegram_message(f"Error has occurred: {error}")
-        error_count += 1
 
-        if error_count >= 10:
+        if not "net::ERR_NETWORK_CHANGED" in str(error):
+            print(f"Error has occurred: {error}")
             send_telegram_message("ERROR THE SCRIPT HAS STOPPED")
             return error
+        else:
+            print(f"Network error has occurred the script continues")
+            cycle()
 
 
 def startup(website):
