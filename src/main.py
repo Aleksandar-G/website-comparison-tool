@@ -42,13 +42,13 @@ def initialize():
 
     except Exception as error:
 
-        if not "net::ERR_NETWORK_CHANGED" in str(error):
+        if "net::ERR_NETWORK_CHANGED" in str(error):
+            print(f"Network error has occurred the script continues")
+            cycle()
+        else:
             print(f"Error has occurred: {error}")
             send_telegram_message("ERROR THE SCRIPT HAS STOPPED")
             return error
-        else:
-            print(f"Network error has occurred the script continues")
-            cycle()
 
 
 def startup(website):
