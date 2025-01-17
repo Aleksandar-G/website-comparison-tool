@@ -1,3 +1,4 @@
+from logging import Logger
 from telebot import TeleBot
 import os
 from dotenv import load_dotenv
@@ -6,10 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-from helper_funcs import Website
-
-
-def send_telegram_message(message: str):
+def send_telegram_message(message: str, logger: Logger):
 
     API_TOKEN = os.getenv("TELEGRAM_API_TOKEN")
     CHATID = os.getenv("TELEGRAM_CHATID")

@@ -1,6 +1,5 @@
 from time import sleep
 from os import rename
-from requests import exceptions
 
 import helper_funcs
 from screenshot_taker import take_screenshot
@@ -22,7 +21,7 @@ websites = [
         url="https://www.funda.nl/zoeken/huur?selected_area=%5B%22eindhoven%22%5D&rooms=%221-%22&price=%22-1000%22&sort=%22date_down%22",
     ),
     helper_funcs.Website(
-        name="Friendly Housing",
+        name="FriendlyHousing",
         url="https://friendlyhousing.nl/en/house-listings/?property-type=appartement&min-price=750&max-price=1500&available-from=&type=&sort=",
     ),
     helper_funcs.Website(
@@ -30,6 +29,8 @@ websites = [
         url="https://www.huurwoningen.nl/in/eindhoven/?price=600-1000",
     ),
 ]
+
+logger = helper_funcs.logger(__name__)
 
 
 def initialize():
@@ -43,11 +44,11 @@ def initialize():
     except Exception as error:
 
         if "net::ERR_NETWORK_CHANGED" in str(error):
-            print(f"Network error has occurred the script continues")
+            logger.error(f"Network error has occurred the script continues")
             cycle()
         else:
-            print(f"Error has occurred: {error}")
-            send_telegram_message("ERROR THE SCRIPT HAS STOPPED")
+            logger.error(f"Error has occurred: {error}")
+            send_telegram_message("ERROR THE SCRIPT HAS STOPPED", logger)
             return error
 
 
@@ -59,12 +60,12 @@ def startup(website):
 
     # take 2 screenshots
     screenshot = take_screenshot(
-        old_screenshot_file_name, SCREENSHOT_FILE_EXTENSION, website
+        old_screenshot_file_name, SCREENSHOT_FILE_EXTENSION, website, logger
     )
 
     convert_screenshot_to_black_white(screenshot, screenshot_old_full_path)
 
-    take_screenshot(screenshot_path, SCREENSHOT_FILE_EXTENSION, website)
+    take_screenshot(screenshot_path, SCREENSHOT_FILE_EXTENSION, website, logger)
 
     convert_screenshot_to_black_white(screenshot, screenshot_full_path)
 
@@ -76,19 +77,21 @@ def watchdog(website: helper_funcs.Website):
 
     # make the "new" screenshot "old" and take a new screenshot
     rename(screenshot_full_path, screenshot_old_full_path)
-    screenshot = take_screenshot(screenshot_path, SCREENSHOT_FILE_EXTENSION, website)
+    screenshot = take_screenshot(
+        screenshot_path, SCREENSHOT_FILE_EXTENSION, website, logger
+    )
 
     convert_screenshot_to_black_white(screenshot, screenshot_full_path)
 
     # compare the screenshots
     if compare_screenshots(screenshot_old_full_path, screenshot_full_path):
-        print(f"{website.name} no updates")
+        logger.info(f"{website.name} no updates")
     else:
-        print(f"{website.name} has new listings")
+        logger.info(f"{website.name} has new listings")
 
         # Message to send
         message = f"{website.name} has new listings URL:{website.url}"
-        send_telegram_message(message)
+        send_telegram_message(message, logger)
 
 
 def cycle():
@@ -96,7 +99,7 @@ def cycle():
         for website in websites:
             watchdog(website)
 
-        print(f"Waiting now for {WAIT_PERIOD_SECONDS} seconds...")
+        logger.info(f"Waiting now for {WAIT_PERIOD_SECONDS} seconds...")
         sleep(WAIT_PERIOD_SECONDS)
 
 

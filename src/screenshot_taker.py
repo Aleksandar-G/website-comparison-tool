@@ -1,9 +1,13 @@
+from logging import Logger
 from playwright.sync_api import sync_playwright, TimeoutError
 from helper_funcs import Website
 
 
 def take_screenshot(
-    screenshot_path: str, screenshot_file_extension: str, website: Website
+    screenshot_path: str,
+    screenshot_file_extension: str,
+    website: Website,
+    logger: Logger,
 ):
 
     screenshot_full_file_path = screenshot_path + "." + screenshot_file_extension
@@ -22,7 +26,7 @@ def take_screenshot(
         except TimeoutError:
             screenshot = page.screenshot(path=screenshot_full_file_path)
 
-        print(f"Screenshot for {website.name} taken")
+        logger.info(f"Screenshot for {website.name} taken")
 
         # Clean up
         browser.close()
