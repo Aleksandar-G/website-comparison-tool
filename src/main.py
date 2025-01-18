@@ -45,7 +45,7 @@ def initialize():
 
         if "net::ERR_NETWORK_CHANGED" in str(error):
             logger.error(f"Network error has occurred the script continues")
-            cycle()
+            initialize()
         else:
             logger.error(f"Error has occurred: {error}")
             send_telegram_message("ERROR THE SCRIPT HAS STOPPED", logger)
