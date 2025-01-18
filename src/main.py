@@ -103,4 +103,8 @@ def cycle():
         sleep(WAIT_PERIOD_SECONDS)
 
 
-initialize()
+try:
+    initialize()
+except Exception as exp:
+    logger.error(f"Error has occurred: {exp}")
+    send_telegram_message("ERROR THE SCRIPT HAS STOPPED", logger)
