@@ -1,4 +1,4 @@
-from os import listdir
+from os import listdir, system
 import logging
 
 
@@ -44,3 +44,7 @@ def logger(name: str):
     logger.addHandler(ch)
 
     return logger
+
+
+def clean_folder(folder_path):
+    system("rm -rf folder_path")
