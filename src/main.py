@@ -34,7 +34,6 @@ logger = helper_funcs.logger(__name__)
 
 
 def initialize():
-
     try:
         if not helper_funcs.is_folder_full(SCREENSHOT_FOLDER, websites):
             for website in websites:
@@ -45,14 +44,12 @@ def initialize():
 
         if "net::ERR_NETWORK_CHANGED" in str(error):
             logger.error(f"Network error has occurred the script continues")
-            helper_funcs.clean_folder(SCREENSHOT_FOLDER)
-            initialize()
 
-        else:
-            logger.error(f"Error has occurred: {error}")
-            send_telegram_message("ERROR THE SCRIPT HAS STOPPED", logger)
-            send_telegram_message(f"The error is: {error}")
-            return error
+        helper_funcs.clean_folder(SCREENSHOT_FOLDER)
+        initialize()
+
+        logger.error(f"Error has occurred: {error}")
+        send_telegram_message(f"The error is: {error}")
 
 
 def startup(website):
