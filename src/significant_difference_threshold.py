@@ -9,7 +9,6 @@ def significant_difference_threshold(image_obj):
     image_pixel_count = image_obj.size[0] * image_obj.size[1]
 
     for x, y in zip(range(image_obj.size[0]), range(image_obj.size[1])):
-        print(image[x, y])
         if float(image[x, y]) != 0:
             different_pixels_counter += 1
 
