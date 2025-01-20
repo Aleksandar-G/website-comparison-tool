@@ -51,6 +51,7 @@ def initialize():
         else:
             logger.error(f"Error has occurred: {error}")
             send_telegram_message("ERROR THE SCRIPT HAS STOPPED", logger)
+            send_telegram_message(f"The error is: {error}")
             return error
 
 
