@@ -32,6 +32,10 @@ websites = [
         name="Rotsvast",
         url="https://www.rotsvast.nl/en/property-listings/?type=2&city=Eindhoven&distance=5&office=0&minimumPrice[2]=800&maximumPrice[2]=1250",
     ),
+    helper_funcs.Website(
+        name="Lemonsuites",
+        url="https://aanbod.lemonsuites.nl/aanbod/huurwoningen?page=1&filter=price:600-1110|location:eindhoven",
+    ),
 ]
 
 logger = helper_funcs.logger(__name__)
