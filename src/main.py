@@ -14,7 +14,7 @@ WAIT_PERIOD_SECONDS = 3600  # 60 minutes
 websites = [
     helper_funcs.Website(
         name="Pararius",
-        url="https://www.pararius.com/apartments/eindhoven/0-1000/1-bedrooms",
+        url="https://www.pararius.com/apartments/eindhoven/800-1200",
     ),
     helper_funcs.Website(
         name="Funda",
@@ -26,7 +26,11 @@ websites = [
     ),
     helper_funcs.Website(
         name="Huurwoningen",
-        url="https://www.huurwoningen.nl/in/eindhoven/?price=600-1000",
+        url="https://www.huurwoningen.nl/in/eindhoven/?price=800-1200",
+    ),
+    helper_funcs.Website(
+        name="Rotsvast",
+        url="https://www.rotsvast.nl/en/property-listings/?type=2&city=Eindhoven&distance=5&office=0&minimumPrice[2]=800&maximumPrice[2]=1250",
     ),
 ]
 
