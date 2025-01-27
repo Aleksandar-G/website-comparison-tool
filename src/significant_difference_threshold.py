@@ -1,6 +1,6 @@
 def significant_difference_threshold(image_obj):
     # 5% of the screenshot should be different to be considered a significant difference
-    DIFFERENCE_THRESHOLD = 0.00003
+    DIFFERENCE_THRESHOLD = 0.00004
 
     # Load the image
     image = image_obj.load()
