@@ -32,6 +32,10 @@ websites = [
         name="Rotsvast",
         url="https://www.rotsvast.nl/en/property-listings/?type=2&city=Eindhoven&distance=5&office=0&minimumPrice[2]=800&maximumPrice[2]=1250",
     ),
+    helper_funcs.Website(
+        name="Brickvastgoed",
+        url="https://en.brickvastgoed.nl/properties?category=1&min_price=490&max_price=1490&city=Eindhoven&view=grid&sorting_method=date.desc",
+    ),
 ]
 
 logger = helper_funcs.logger(__name__)
