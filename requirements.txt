@@ -2,4 +2,4 @@ playwright
 pillow
 pyTelegramBotAPI
 python-dotenv
-beautifulsoup
+beautifulsoup4
