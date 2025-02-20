@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from logging import Logger
 from playwright.sync_api import sync_playwright
 from helper_funcs import Website
-from prepare_content import prepare_content
+from prepare_content import clean_content
 
 
 def extract_content(
@@ -25,10 +25,10 @@ def extract_content(
         finally:
             soup = BeautifulSoup(page.content(), "html.parser")
 
-            pure_content = prepare_content(soup)
+            pure_content = clean_content(soup)
 
             with open(f"{content_full_file_path}", "w") as e:
-                e.write(str(pure_content.prettify()))
+                e.write(str(pure_content))
 
         logger.info(f"Content for {website.name} taken")
 

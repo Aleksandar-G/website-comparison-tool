@@ -1,5 +1,5 @@
 from time import sleep
-from os import rename
+from os import path, rename, remove
 
 import helper_funcs
 from content_extractor import extract_content
@@ -8,7 +8,7 @@ from send_telegram_notification import send_telegram_message
 
 CONTENT_FOLDER = "./contents/"
 CONTENT_FILE_EXTENSION = "html"
-WAIT_PERIOD_SECONDS = 5  # 30 minutes
+WAIT_PERIOD_SECONDS = 1800  # 30 minutes
 
 websites = [
     helper_funcs.Website(
@@ -54,7 +54,6 @@ def initialize():
 def startup(website):
     content_path = CONTENT_FOLDER + website.name
     old_content_file_name = content_path + "_old"
-
     # take 2 contents
     extract_content(old_content_file_name, CONTENT_FILE_EXTENSION, website, logger)
 
@@ -66,8 +65,17 @@ def watchdog(website: helper_funcs.Website):
     content_full_path = f"{content_path}.{CONTENT_FILE_EXTENSION}"
     content_old_full_path = f"{content_path}_old.{CONTENT_FILE_EXTENSION}"
 
+    # delete "old" content
+    if path.exists(content_old_full_path):
+        remove(content_old_full_path)
+    else:
+        logger.error(
+            f"{content_old_full_path} Cannot be deleted because if does not exists"
+        )
     # make the "new" content "old" and take a new content
     rename(content_full_path, content_old_full_path)
+
+    # fetch fresh content
     extract_content(content_path, CONTENT_FILE_EXTENSION, website, logger)
 
     # compare the contents
