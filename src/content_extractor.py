@@ -1,3 +1,4 @@
+from time import sleep
 from bs4 import BeautifulSoup
 
 from logging import Logger
@@ -20,7 +21,8 @@ def extract_content(
         browser = p.chromium.launch(headless=False)
         page = browser.new_page()
         try:
-            page.goto(website.url, wait_until="networkidle")
+            page.goto(website.url)
+            sleep(10)
 
         finally:
             soup = BeautifulSoup(page.content(), "html.parser")
