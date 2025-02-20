@@ -22,7 +22,7 @@ def extract_content(
         page = browser.new_page()
         try:
             page.goto(website.url)
-            sleep(10)
+            sleep(30)
 
         finally:
             soup = BeautifulSoup(page.content(), "html.parser")
