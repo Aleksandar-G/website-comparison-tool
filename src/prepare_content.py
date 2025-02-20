@@ -15,6 +15,7 @@ def remove_attributes(soup: BeautifulSoup) -> str:
         tag.attrs.pop("style", None)
         tag.attrs.pop("aria-controls", None)
         tag.attrs.pop("aria-labelledby", None)
+        tag.attrs.pop("data-smartmenus-id", None)
 
     return soup.prettify()
 
