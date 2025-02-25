@@ -47,4 +47,17 @@ def logger(name: str):
 
 
 def clean_folder(folder_path):
-    system("rm -rf folder_path")
+    system(f"rm -rf {folder_path}")
+
+
+def create_folder(folder_path: str):
+    system(f"mkdir {folder_path}")
+
+
+def extract_website_name_from_path(path: str) -> str:
+    parts = path.split("/")
+    return parts[len(parts) - 1]
+
+
+def move_file(original_file_path: str, new_file_path: str):
+    system(f"cp {original_file_path} {new_file_path}")
