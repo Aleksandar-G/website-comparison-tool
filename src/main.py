@@ -80,7 +80,7 @@ def watchdog(website: helper_funcs.Website):
     extract_content(content_path, CONTENT_FILE_EXTENSION, website, logger)
 
     # compare the contents
-    if compare_contents(content_old_full_path, content_full_path):
+    if compare_contents(content_old_full_path, content_full_path, DIFFERENCE_FOLDER):
         logger.info(f"{website.name} no updates")
     else:
         logger.info(f"{website.name} has new listings")
