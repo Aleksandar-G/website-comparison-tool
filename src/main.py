@@ -16,14 +16,14 @@ websites = [
         name="Pararius",
         url="https://www.pararius.com/apartments/eindhoven/800-1200",
     ),
-    helper_funcs.Website(
-        name="FriendlyHousing",
-        url="https://friendlyhousing.nl/en/house-listings/?property-type=appartement&min-price=750&max-price=1500&available-from=&type=&sort=",
-    ),
-    helper_funcs.Website(
-        name="Rotsvast",
-        url="https://www.rotsvast.nl/en/property-listings/?type=2&city=Eindhoven&distance=5&office=0&minimumPrice[2]=800&maximumPrice[2]=1250",
-    ),
+    # helper_funcs.Website(
+    #     name="FriendlyHousing",
+    #     url="https://friendlyhousing.nl/en/house-listings/?property-type=appartement&min-price=750&max-price=1500&available-from=&type=&sort=",
+    # ),
+    # helper_funcs.Website(
+    #     name="Rotsvast",
+    #     url="https://www.rotsvast.nl/en/property-listings/?type=2&city=Eindhoven&distance=5&office=0&minimumPrice[2]=800&maximumPrice[2]=1250",
+    # ),
     helper_funcs.Website(
         name="H2S",
         url="https://holland2stay.com/residences?page=1&available_to_book%5Bfilter%5D=Available+to+book%2C179&city%5Bfilter%5D=Eindhoven%2C29",
