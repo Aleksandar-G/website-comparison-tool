@@ -8,7 +8,7 @@ from send_telegram_notification import send_telegram_message
 
 CONTENT_FOLDER = "./contents/"
 CONTENT_FILE_EXTENSION = "html"
-WAIT_PERIOD_SECONDS = 1800  # 30 minutes
+WAIT_PERIOD_SECONDS = 5  # 30 minutes
 DIFFERENCE_FOLDER = "./differences/"
 
 websites = [

@@ -5,10 +5,12 @@ create-venv: clean-venv
 create-folder-contents:
 	@echo "Creating folder contents"
 	@mkdir -p contents
+	@mkdir -p differences
 
 clean-folder-contents:
 	@echo "Removing folder contents"
 	@rm -rf ./contents
+	@rm -rf ./differences
 
 install:
 	@echo "Installing dependencies from the requirements.txt"
