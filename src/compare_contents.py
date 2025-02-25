@@ -20,7 +20,7 @@ def compare_contents(
     else:
         diff = list(set(page_content_new) - set(page_content_old))
         # extract website name
-        website_name = extract_website_name_from_path(page_content_old)
+        website_name = extract_website_name_from_path(content_path_old)
         # create folder
         new_folder_path = (
             differences_folder + website_name + str(datetime.datetime.now().isoformat())
