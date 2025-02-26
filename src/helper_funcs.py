@@ -59,5 +59,5 @@ def extract_website_name_from_path(path: str) -> str:
     return parts[len(parts) - 1]
 
 
-def move_file(original_file_path: str, new_file_path: str):
+def copy_file(original_file_path: str, new_file_path: str):
     system(f"cp {original_file_path} {new_file_path}")

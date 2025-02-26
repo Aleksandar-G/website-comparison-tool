@@ -1,5 +1,5 @@
 import datetime
-from helper_funcs import extract_website_name_from_path, create_folder, move_file
+from helper_funcs import extract_website_name_from_path, create_folder, copy_file
 
 
 def compare_contents(
@@ -15,7 +15,7 @@ def compare_contents(
     page_content_old = sorted(str(f1).split(" "))
     page_content_new = sorted(str(f2).split(" "))
 
-    if page_content_old == page_content_new:
+    if list(set(page_content_new) - set(page_content_old)) == []:
         return True
     else:
         diff1 = list(set(page_content_new) - set(page_content_old))
@@ -28,8 +28,8 @@ def compare_contents(
         )
         create_folder(new_folder_path)
         # put original files
-        move_file(page_content_old, new_folder_path)
-        move_file(page_content_new, new_folder_path)
+        copy_file(content_path_old, new_folder_path)
+        copy_file(content_path_new, new_folder_path)
         # put diff file there
         with open(new_folder_path + f"/{website_name}-diff1", "w") as f:
             f.write(str(diff1))
