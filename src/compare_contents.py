@@ -18,7 +18,8 @@ def compare_contents(
     if page_content_old == page_content_new:
         return True
     else:
-        diff = list(set(page_content_new) - set(page_content_old))
+        diff1 = list(set(page_content_new) - set(page_content_old))
+        diff2 = list(set(page_content_old) - set(page_content_new))
         # extract website name
         website_name = extract_website_name_from_path(content_path_old)
         # create folder
@@ -30,6 +31,8 @@ def compare_contents(
         move_file(page_content_old, new_folder_path)
         move_file(page_content_new, new_folder_path)
         # put diff file there
-        with open(new_folder_path + "-diff", "w") as f:
-            f.write(str(diff))
+        with open(new_folder_path + f"/{website_name}-diff1", "w") as f:
+            f.write(str(diff1))
+        with open(new_folder_path + f"/{website_name}-diff2", "w") as f:
+            f.write(str(diff2))
         return False
